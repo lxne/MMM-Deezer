@@ -1,8 +1,8 @@
 {
-  "name": "mmm-musicondemand",
+  "name": "mmm-deezer",
   "version": "1.0.0",
-  "description": "A module for Magic Mirror using music on demand.",
-  "main": "MMM-MusicOnDemand.js",
+  "description": "A module for MagicMirror using Deezer's webservice.",
+  "main": "MMM-Deezer.js",
   "dependencies": {
     "puppeteer": "1.13.0"
   },
@@ -12,17 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ptrk95/MMM-MusicOnDemand.git"
+    "url": "git+https://github.com/lxne/MMM-Deezer.git"
   },
   "keywords": [
     "musicondemand",
     "music",
-    "deezer"
+    "deezer",
+    "flow"
   ],
   "author": "Patrick Müller",
+  "contributors": [
+    {"name":"Alexander Holzinger"}
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ptrk95/MMM-MusicOnDemand/issues"
+    "url": "https://github.com/lxne/MMM-Deezer/issues"
   },
-  "homepage": "https://github.com/ptrk95/MMM-MusicOnDemand#readme"
+  "homepage": "https://github.com/lxne/MMM-Deezer#readme"
 }
