@@ -1,40 +1,40 @@
-.MOD_player{
+.DZR_player{
     margin : auto;
     width:250px;
     display: block;
 }
 
-.MOD_cover-container{
+.DZR_cover-container{
 
 }
 
-.MOD_text-container{
+.DZR_text-container{
 
 }
 
-.MOD_cover{
+.DZR_cover{
     width:250px;
     height:250px;
 }
 
-.MOD_init{
+.DZR_init{
     font-size:28px;
     font-weight: bold;
     margin: 0;
 }
     
-.MOD_title{
+.DZR_title{
     font-size:20px;
     font-weight: bold;
     margin: 0;
 }
 
-.MOD_artist{
+.DZR_artist{
     font-size:20px;
     margin: 0px;
 }
 
-.MOD_time{
+.DZR_time{
     font-size:20px;
     margin: 0px;
 }
