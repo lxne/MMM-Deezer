@@ -26,10 +26,10 @@ Module.register("MMM-Deezer",{
 		var wrapper = document.createElement("div");
 		var text = '';
 		if(!this.closed){
-			text += "<div class='MOD_player'>";
-			text += "<div class='MOD_text-container'><table class='small'><tr class='MOD_init'><td>"+ this.init +"</td></tr><tr class='MOD_title bright'><td>"+ this.Title +"</td></tr><tr class='MOD_artist'><td>"+ this.Artist +"</td></tr><tr class='MOD_time'><td>"+ this.currentTime + " " + this.maxTime + "</td></tr></table></div>";
+			text += "<div class='DZR_player'>";
+			text += "<div class='DZR_text-container'><table class='small'><tr class='DZR_init'><td>"+ this.init +"</td></tr><tr class='DZR_title bright'><td>"+ this.Title +"</td></tr><tr class='DZR_artist'><td>"+ this.Artist +"</td></tr><tr class='DZR_time'><td>"+ this.currentTime + " " + this.maxTime + "</td></tr></table></div>";
 			if(this.config.showCover && this.Artist != "Deezer"){
-				text += "<div class='MOD_cover-container'><div class='MOD_cover'><img src='"+ this.CoverLink +"' width='250'></div></div>";
+				text += "<div class='DZR_cover-container'><div class='DZR_cover'><img src='"+ this.CoverLink +"' width='250'></div></div>";
 			}
 
 			text += "</div>";
