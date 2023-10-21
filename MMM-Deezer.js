@@ -83,7 +83,7 @@ Module.register("MMM-Deezer",{
 		} else {
 			Log.log(this.name + " received a system notification: " + notification);
 		}
-		if(notification == "AtMusicOnDemand"){
+		if(notification == "AtDeezer"){
 			switch(payload.message){
 				case("Play"):
 					this.sendSocketNotification("PLAY", "");
