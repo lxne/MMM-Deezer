@@ -1,13 +1,13 @@
-# MMM-MusicOnDemand
-A module for the [MagicMirror](https://github.com/MichMich/MagicMirror) using a music on demand service.
+# MMM-Deezer
+A module for the [MagicMirror](https://github.com/MichMich/MagicMirror) using Deezer's webservice.
 
-This module allows you to play music from [Deezer](https://www.deezer.com) with [puppeteer](https://pptr.dev/). That means you need at least a free account from Deezer. It is meant to be used with a speech recognition module like [MMM-AssistantMk2](https://github.com/eouia/MMM-AssistantMk2), but it should work with other modules as long as you send the correct notifications as described below. Since this module opens up a chromium instance and navigates through the deezer website to play music in the background, it may take some time or you may get timeouts on low end hardware like a Raspberry Pi.
+This module allows you to play music from [Deezer](https://www.deezer.com) with [puppeteer](https://pptr.dev/). That means you need at least a free account from Deezer. It is meant to be used with a speech recognition module like [MMM-GoogleAssistant](https://wiki.bugsounet.fr/en/MMM-GoogleAssistant), but it should work with other modules as long as you send the correct notifications as described below. Since this module opens up a chromium instance and navigates through the deezer website to play music in the background, it may take some time or you may get timeouts on low end hardware like a Raspberry Pi.
 
 Confirmed working environment:
 - Raspberry Pi 3b+ with Raspbian Stretch 9.6 (32-Bit) with preinstalled chromium **Version 65.0.3325.181** , a node installation and latest [MagicMirror](https://github.com/MichMich/MagicMirror) (v.2.6.0) with electron v.2.0.16 preinstalled (v.1.4.15 may not work)
 
 ### Screenshot
-![](https://raw.githubusercontent.com/ptrk95/MMM-MusicOnDemand/master/img/Example.png)
+![](https://raw.githubusercontent.com/ptrk95/MMM-Deezer/master/img/Example.png)
 ## Installation
 
 #### Have a look at the Troubleshooting section if it says "Initializing..." all the time or throws other errors
@@ -16,14 +16,14 @@ Install like that:
 
 ```
 cd ~/MagicMirror/modules/
-git clone https://github.com/ptrk95/MMM-MusicOnDemand.git
-cd MMM-MusicOnDemand
+git clone https://github.com/lxne/MMM-Deezer.git
+cd MMM-Deezer
 npm install
 ```
 It installs a puppeteer package with a chromium browser (~100mb-270mb). If you don't want to use the puppeteer browser or if you're running on a Raspberry Pi you may want to delete this extra chromium browser:
 
 ```
-cd ~/MagicMirror/modules/MMM-MusicOnDemand/node_modules/puppeteer
+cd ~/MagicMirror/modules/MMM-Deezer/node_modules/puppeteer
 rm -r .local-chromium
 ```
 
@@ -33,7 +33,7 @@ rm -r .local-chromium
 Copy the following to your config.txt:
 ```
 {
-	module: "MMM-MusicOnDemand",
+	module: "MMM-Deezer",
 	position: "upper_third",
 	config: {
 		chromiumPath : "/usr/bin/chromium-browser",  // chromiumPath : null, if you want to use puppeteer browser
@@ -248,7 +248,7 @@ That's most likely a versioning error between puppeteer and your installation of
 
 Try: 
 ```
-cd ~/MagicMirror/modules/MMM-MusicOnDemand
+cd ~/MagicMirror/modules/MMM-Deezer
 npm install puppeteer@1.11.0
 ```
 And make sure your Chromium version is at least Version 65.0.3325.181! 
