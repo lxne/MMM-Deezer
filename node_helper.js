@@ -94,7 +94,7 @@ async function LoginDeezer(){
 		self.page = await self.browser.newPage();
 		
 		await self.page.setDefaultNavigationTimeout(120000);
-		await self.page.goto("https://www.deezer.com/en/");
+		await self.page.goto("https://www.deezer.com/en/"); // Englische Seite aufrufen um entlische Selektoren für Klick-Befehle zu erzwingen
 
 		//await self.page.waitForNavigation(); // somehow doesn't work, just sits there for ever
 		self.sendSocketNotification("Ready", "");
