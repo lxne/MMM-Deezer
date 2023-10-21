@@ -132,7 +132,8 @@ async function getCover(){
 			}	
 		} 
 		await delay(1500);
-		var link = await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-options > ul > li:nth-child(2) > button > figure > div > img').getAttribute('src'));
+		var link = await self.page.evaluate(()=>document.querySelector('#page_player div.player-options button.queuelist > figure > div > img').getAttribute('src'));
+		//var link = await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-options > ul > li:nth-child(2) > button > figure > div > img').getAttribute('src'));
 		var newlink = link.replace("28x28", "380x380");
 		self.sendSocketNotification("Cover", newlink);
 		console.error("got coverlink: " + newlink + " old Link: " + link); 
@@ -148,7 +149,8 @@ async function playMusic (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
-			await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-controls > ul > li:nth-child(3) > button').click());
+			await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Wiedergabe"]').click()); // DE-Selector
+			//await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-controls > ul > li:nth-child(3) > button').click());
 			self.playingMusic = true;
 			update();
 			console.error("playing music");
@@ -165,7 +167,8 @@ async function pauseMusic (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
-			await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-controls > ul > li:nth-child(3) > button').click());  // yep, the same as playMusic()
+			await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Pause"]').click()); // DE-Selector, selbes Element anderes label
+			//await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-controls > ul > li:nth-child(3) > button').click());  // yep, the same as playMusic()
 			self.playingMusic = false;
 			console.error("pause music");
 		}  
@@ -274,7 +277,7 @@ async function nextTitle(){
 		if(!self.loggedIn){
 			await LoginDeezer()
 		}
-		await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-controls > ul > li:nth-child(5) > div > button').click());
+		await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Weiter"]').click()); // DE-Selector
 		if(!self.playingMusic){
 			self.playingMusic = true;
 			update();
@@ -292,7 +295,7 @@ async function previousTitle (){
 		if(!self.loggedIn){
 			await LoginDeezer()
 		}
-		await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-controls > ul > li:nth-child(1) > div > button').click());
+		await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Zurück"]').click()); // DE-Selector
 		if(!self.playingMusic){
 			self.playingMusic = true;
 			update();
@@ -329,12 +332,20 @@ async function playLoved (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
-			await self.page.evaluate(()=>document.querySelector('#page_player > div.player-bottom > div.player-options > ul > li:nth-child(1) > ul > li:nth-child(2) > button').click());
+			await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
+			//await self.page.evaluate(()=>document.querySelector('#page_player > div.player-bottom > div.player-options > ul > li:nth-child(1) > ul > li:nth-child(2) > button').click());
 			await delay(300);
-			await self.page.evaluate(()=>document.querySelector('#page_sidebar > div:nth-child(2) > div.nano-content > ul > li:nth-child(4) > a').click());
+			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
+			//await self.page.evaluate(()=>document.querySelector('#page_sidebar > div:nth-child(2) > div.nano-content > ul > li:nth-child(4) > a').click());
 			await delay(300);
-			await self.page.waitForSelector('#page_profile > div:nth-child(2) > div > div > section > div:nth-child(2) > div > div.datagrid-toolbar > div:nth-child(1) > div > button');
-			await self.page.evaluate(()=>document.querySelector('#page_profile > div:nth-child(2) > div > div > section > div:nth-child(2) > div > div.datagrid-toolbar > div:nth-child(1) > div > button').click());
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Zufallswiedergabe anschalten"]').click()); // DE-Selector; Zufallswiedergabe an
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Wiederholen ausschalten"]').click()); // DE-Selector; Klicken falls Ein-Song-Wiederholung an
+			await delay(300);
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Alle Titel wiederholen"]').click()); // DE-Selector; Zufallswiedergabe an
+			//await self.page.waitForSelector('#page_profile > div:nth-child(2) > div > div > section > div:nth-child(2) > div > div.datagrid-toolbar > div:nth-child(1) > div > button');
+			//await self.page.evaluate(()=>document.querySelector('#page_profile > div:nth-child(2) > div > div > section > div:nth-child(2) > div > div.datagrid-toolbar > div:nth-child(1) > div > button').click());
+			await delay(300);
+			await self.page.evaluate(()=>document.querySelector('#dzr-app a.logo[aria-label="Deezer"]').click()); // Zurück zur Hauptseite
 			self.playingMusic = true;
 			update();
 			console.error("play loved");
