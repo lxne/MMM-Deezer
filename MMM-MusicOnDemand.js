@@ -1,4 +1,4 @@
-Module.register("MMM-MusicOnDemand",{
+Module.register("MMM-Deezer",{
 	
 	defaults:{
 		chromiumPath: "/usr/bin/chromium-browser", // Set: chromiumPath : null, if you want to use the puppeteer chromium
