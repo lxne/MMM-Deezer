@@ -314,7 +314,7 @@ async function playFlow (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
-			await self.page.evaluate(()=>document.querySelector('#dzr-app a.logo[aria-label="Deezer"]').click()); // Zur Hauptseite, falls nicht dort
+			await self.page.click('#dzr-app a.logo[aria-label="Deezer"]'); // Zur Hauptseite, falls nicht dort
 			await self.page.waitForSelector('#page_content > div.channel div[data-testid="flow-config-default"] button');
 			await self.page.evaluate(()=>document.querySelector('#page_content > div.channel div[data-testid="flow-config-default"] button').click());
 			self.playingMusic = true;
@@ -333,10 +333,11 @@ async function playLoved (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
-			await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
-			//await self.page.waitForSelector('#page_content button.chakra-button[data-testid="playlist-play-button"]');
+			//await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
+			await self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
+			await self.page.waitForSelector('#page_content button.chakra-button[data-testid="playlist-play-button"]');
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
-			//await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
+			await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
 			await delay(1000);
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
