@@ -314,6 +314,8 @@ async function playFlow (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
+			await self.page.evaluate(()=>document.querySelector('#dzr-app a.logo[aria-label="Deezer"]').click()); // Zur Hauptseite, falls nicht dort
+			await self.page.waitForSelector('#page_content > div.channel div[data-testid="flow-config-default"] button');
 			await self.page.evaluate(()=>document.querySelector('#page_content > div.channel div[data-testid="flow-config-default"] button').click());
 			//await self.page.evaluate(()=>document.querySelector('#page_content > div.channel > section:nth-child(1) > div.carousel > div:nth-child(2) > div.carousel-wrapper > div.carousel-inner > ul > li:nth-child(1) > figure > ul > li > button').click());
 			self.playingMusic = true;
@@ -335,17 +337,16 @@ async function playLoved (){
 			await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
 			//await self.page.evaluate(()=>document.querySelector('#page_player > div.player-bottom > div.player-options > ul > li:nth-child(1) > ul > li:nth-child(2) > button').click());
 			await delay(300);
+			await self.page.waitForSelector('#page_content button.chakra-button[data-testid="playlist-play-button"]');
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar > div:nth-child(2) > div.nano-content > ul > li:nth-child(4) > a').click());
 			await delay(300);
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
 			await delay(300);
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // DE-Selector; Zufallswiedergabe an
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
 			//await self.page.waitForSelector('#page_profile > div:nth-child(2) > div > div > section > div:nth-child(2) > div > div.datagrid-toolbar > div:nth-child(1) > div > button');
 			//await self.page.evaluate(()=>document.querySelector('#page_profile > div:nth-child(2) > div > div > section > div:nth-child(2) > div > div.datagrid-toolbar > div:nth-child(1) > div > button').click());
-			await delay(300);
-			await self.page.evaluate(()=>document.querySelector('#dzr-app a.logo[aria-label="Deezer"]').click()); // Zurück zur Hauptseite
 			self.playingMusic = true;
 			update();
 			console.error("play loved");
