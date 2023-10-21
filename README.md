@@ -73,19 +73,19 @@ To use the above features you have to send predefined notifications to this modu
 
 | Notification | payload | Description |
 |:------------ |:------- |:----------- |
-| "AtMusicOnDemand" | payload.message="Play" | Plays music |
-| "AtMusicOnDemand" | payload.message="Pause" | Pauses music |
-| "AtMusicOnDemand" | payload.message="Next" | Plays next Title |
-| "AtMusicOnDemand" | payload.message="Previous" | Plays previous Title |
-| "AtMusicOnDemand" | payload.message="Close" | Closes Browser |
-| "AtMusicOnDemand" | payload.message="Flow" | Plays your personal soundtrack made by Deezer |
-| "AtMusicOnDemand" | payload.message="Loved" | Plays your favourite tracks randomly |
-| "AtMusicOnDemand" | payload.message="Artist"; payload.Artist="NAME_OF_ARTIST" | Searches for a Artist and plays hits |
-| "AtMusicOnDemand" | payload.message="Title"; payload.Title="NAME_OF_TITLE" | Searches for a Title and plays it |
+| "AtDeezer" | payload.message="Play" | Plays music |
+| "AtDeezer" | payload.message="Pause" | Pauses music |
+| "AtDeezer" | payload.message="Next" | Plays next Title |
+| "AtDeezer" | payload.message="Previous" | Plays previous Title |
+| "AtDeezer" | payload.message="Close" | Closes Browser |
+| "AtDeezer" | payload.message="Flow" | Plays your personal soundtrack made by Deezer |
+| "AtDeezer" | payload.message="Loved" | Plays your favourite tracks randomly |
+| "AtDeezer" | payload.message="Artist"; payload.Artist="NAME_OF_ARTIST" | Searches for a Artist and plays hits |
+| "AtDeezer" | payload.message="Title"; payload.Title="NAME_OF_TITLE" | Searches for a Title and plays it |
 
 For example, this will search for the title "Losing it" if you send this with your module:
 ```
-this.sendNotification('AtMusicOnDemand', {message: "Title", Title: "Losing it"});
+this.sendNotification('AtDeezer', {message: "Title", Title: "Losing it"});
 ```
 As you can see the information about the name of the title is needed for this action, this is where a speech recognition software comes in handy. I already set up a couple of "transcription hooks" and even two [gactions](https://developers.google.com/actions/) in combination with [MMM-AssistantMk2](https://github.com/eouia/MMM-AssistantMk2), so that all the features are available. 
 
@@ -96,7 +96,7 @@ First you have to add the following commands to your config file:
 command: {
 	"CLOSE_MUSIC": {
 		notificationExec: {
-		      notification: "AtMusicOnDemand",
+		      notification: "AtDeezer",
 		      payload: {
 			message: "Close",		      
       			}
@@ -105,7 +105,7 @@ command: {
 	"SEARCHTITLE": {
 		notificationExec: {
 			notification :() =>{
-			return "AtMusicOnDemand"
+			return "AtDeezer"
 			},	
 		      payload:(params, key)=> {
 			return {
@@ -118,7 +118,7 @@ command: {
 	"SEARCHARTIST": {
 		notificationExec: {
 			notification :() =>{
-			return "AtMusicOnDemand"
+			return "AtDeezer"
 			},	
 		      payload:(params, key)=> {
 			return {
@@ -130,7 +130,7 @@ command: {
 	},
 	"PLAYMUSIC": {
 		notificationExec: {
-		      notification: "AtMusicOnDemand",
+		      notification: "AtDeezer",
 		      payload: {
 			message: "Play",		      
       			}
@@ -138,7 +138,7 @@ command: {
 	},
 	"NEXT_TITLE": {
 		notificationExec: {
-		      notification: "AtMusicOnDemand",
+		      notification: "AtDeezer",
 		      payload: {
 			message: "Next",		      
       			}
@@ -146,7 +146,7 @@ command: {
 	},
 	"PAUSE_MUSIC": {
 		notificationExec: {
-		      notification: "AtMusicOnDemand",
+		      notification: "AtDeezer",
 		      payload: {
 			message: "Pause",		      
       			}
@@ -154,7 +154,7 @@ command: {
 	},
 	"PREV_TITLE": {
 		notificationExec: {
-		      notification: "AtMusicOnDemand",
+		      notification: "AtDeezer",
 		      payload: {
 			message: "Previous",		      
       			}
@@ -162,7 +162,7 @@ command: {
 	},
 	"FLOW": {
 		notificationExec: {
-		      notification: "AtMusicOnDemand",
+		      notification: "AtDeezer",
 		      payload: {
 				message: "Flow",
 				}
@@ -170,7 +170,7 @@ command: {
 	},
 	"LOVED": {
       	notificationExec: {
-        	notification: "AtMusicOnDemand",
+        	notification: "AtDeezer",
         	payload: {
           		message: "Loved",
         	}
