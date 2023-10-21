@@ -311,8 +311,7 @@ async function playFlow (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
-			await self.page.evaluate(()=>document.querySelector('#page_content > div.channel > section:nth-child(1) > div.carousel > div:nth-child(2) > div.carousel-wrapper > div.carousel-inner > ul > li:nth-child(1) > figure > ul > li > button‘).click());
-			//await self.page.evaluate(()=>document.querySelector('#page_content > div.channel > section:nth-child(1) > div.carousel > div:nth-child(2) > div.carousel-wrapper > div.carousel-inner > ul > figure:nth-child(1) > div.slide-foreground > ul > button').click());
+			await self.page.evaluate(()=>document.querySelector('#page_content > div.channel > section:nth-child(1) > div.carousel > div:nth-child(2) > div.carousel-wrapper > div.carousel-inner > ul > li:nth-child(1) > figure > ul > li > button').click());
 			self.playingMusic = true;
 			update();
 			console.error("play flow");
