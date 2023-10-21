@@ -94,7 +94,7 @@ async function LoginDeezer(){
 		self.page = await self.browser.newPage();
 		
 		await self.page.setDefaultNavigationTimeout(120000);
-		await self.page.goto("https://www.deezer.com");
+		await self.page.goto("https://www.deezer.com/en/");
 
 		//await self.page.waitForNavigation(); // somehow doesn't work, just sits there for ever
 		self.sendSocketNotification("Ready", "");
@@ -149,7 +149,7 @@ async function playMusic (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
-			await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Wiedergabe"]').click()); // DE-Selector
+			await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Play"]').click()); // EN-Selector
 			//await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-controls > ul > li:nth-child(3) > button').click());
 			self.playingMusic = true;
 			update();
@@ -167,7 +167,7 @@ async function pauseMusic (){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
-			await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Pause"]').click()); // DE-Selector, selbes Element anderes label
+			await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Pause"]').click()); // EN-Selector, selbes Element anderes label
 			//await self.page.evaluate(()=>document.querySelector('#page_player > div > div.player-controls > ul > li:nth-child(3) > button').click());  // yep, the same as playMusic()
 			self.playingMusic = false;
 			console.error("pause music");
@@ -259,9 +259,9 @@ async function updateTitleAndArtist(){
 	}
 	self.sendSocketNotification("Update", {
 		Artist: artist,
-		Title:title,
-		CurrentTime : currentTime,
-		MaxTime : maxTime,
+		Title: title,
+		CurrentTime: currentTime,
+		MaxTime: maxTime,
 	});
 	getCover();
 	}catch(error){
@@ -277,7 +277,7 @@ async function nextTitle(){
 		if(!self.loggedIn){
 			await LoginDeezer()
 		}
-		await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Weiter"]').click()); // DE-Selector
+		await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Next"]').click()); // EN-Selector
 		if(!self.playingMusic){
 			self.playingMusic = true;
 			update();
@@ -295,7 +295,7 @@ async function previousTitle (){
 		if(!self.loggedIn){
 			await LoginDeezer()
 		}
-		await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Zurück"]').click()); // DE-Selector
+		await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Back"]').click()); // EN-Selector
 		if(!self.playingMusic){
 			self.playingMusic = true;
 			update();
@@ -338,10 +338,10 @@ async function playLoved (){
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar > div:nth-child(2) > div.nano-content > ul > li:nth-child(4) > a').click());
 			await delay(300);
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Zufallswiedergabe anschalten"]').click()); // DE-Selector; Zufallswiedergabe an
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Wiederholen ausschalten"]').click()); // DE-Selector; Klicken falls Ein-Song-Wiederholung an
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
 			await delay(300);
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Alle Titel wiederholen"]').click()); // DE-Selector; Zufallswiedergabe an
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // DE-Selector; Zufallswiedergabe an
 			//await self.page.waitForSelector('#page_profile > div:nth-child(2) > div > div > section > div:nth-child(2) > div > div.datagrid-toolbar > div:nth-child(1) > div > button');
 			//await self.page.evaluate(()=>document.querySelector('#page_profile > div:nth-child(2) > div > div > section > div:nth-child(2) > div > div.datagrid-toolbar > div:nth-child(1) > div > button').click());
 			await delay(300);
