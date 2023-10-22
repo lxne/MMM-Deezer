@@ -334,10 +334,9 @@ async function playLoved (){
 				await LoginDeezer()
 			}
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
-
 			// Nächster Song – nur zum Testen ob Loved überhaupt was macht
 			await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Next"]').click()); // EN-Selector
-			
+			// Make Love
 			await self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
 			await self.page.waitForSelector('#page_content button.chakra-button[data-testid="playlist-play-button"]');
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
