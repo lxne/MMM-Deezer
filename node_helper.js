@@ -332,8 +332,8 @@ async function playLoved (){
 			}
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
 			await self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
-			await delay(5000);
-			await self.page.waitForSelector('#page_content div.loved-heading div[data-testid="play"]');
+		//	await delay(5000);
+		//	await self.page.waitForSelector('#page_content div.loved-heading div[data-testid="play"]');
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 	//		await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
 	//		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
