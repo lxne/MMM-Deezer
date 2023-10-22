@@ -327,6 +327,19 @@ async function playFlow (){
 	
 }
 
+
+
+		await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Next"]').click()); // EN-Selector
+		if(!self.playingMusic){
+			self.playingMusic = true;
+			update();
+		}
+		console.error("next title");
+	}catch(error){
+		console.error(error);
+
+
+
 async function playLoved (){
 	try{
 		if(!self.playingMusic){
@@ -334,19 +347,23 @@ async function playLoved (){
 				await LoginDeezer()
 			}
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
-			// Nächster Song – nur zum Testen ob Loved überhaupt was macht
+			// 'Nächster Song'-Abschnitt – nur zum Testen ob Loved überhaupt was macht
 			await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Next"]').click()); // EN-Selector
+			if(!self.playingMusic){
+				self.playingMusic = true;
+				update();
+			}
 			// Make Love
-			await self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
-			await self.page.waitForSelector('#page_content button.chakra-button[data-testid="playlist-play-button"]');
-			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
-			await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
-			await delay(1000);
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
-			self.playingMusic = true;
-			update();
+	//		await self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
+	//		await self.page.waitForSelector('#page_content button.chakra-button[data-testid="playlist-play-button"]');
+	//		await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
+	//		await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
+	//		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
+	//		await delay(1000);
+	//		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
+	//		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
+		//	self.playingMusic = true;
+		//	update();
 			console.error("play loved");
 		}
 	}catch(error){
