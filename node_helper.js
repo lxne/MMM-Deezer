@@ -332,8 +332,8 @@ async function playLoved (){
 			}
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
 			const [response] = await Promise.all([
-				page.waitForNavigation(), // The promise resolves after navigation has finished
-				page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'), // Clicking the link will indirectly cause a navigation
+				self.page.waitForNavigation(), // The promise resolves after navigation has finished
+				self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'), // Clicking the link will indirectly cause a navigation
 			]);
 	//		self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
 	//		await delay(1000);
