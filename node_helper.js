@@ -280,7 +280,7 @@ async function playLoved (){
 			await delay(300);
 		}
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Repeat all tracks in list"){
-x			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
 		}
 		if(!self.playingMusic){
 			self.playingMusic = true;
