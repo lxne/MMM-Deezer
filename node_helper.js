@@ -270,21 +270,21 @@ async function playLoved (){
 	//	await delay(1000);
 		await self.page.waitForSelector('#page_content div.loved-heading div[data-testid="play"]');
 		await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
-		if(!self.playingMusic){
-			self.playingMusic = true;
-			update();
-		}
 		await self.page.waitForSelector('#page_player button[aria-label$="Shuffle"]');
 		if(self.page.querySelector('#page_player button[aria-label$="Shuffle"]').getAttribute('aria-label')=="Turn on Shuffle"){
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
+			await delay(300);
 		}
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Turn off repeat"){
-			await delay(300);
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
+			await delay(300);
 		}
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Repeat all tracks in list"){
-			await delay(300);
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
+x			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
+		}
+		if(!self.playingMusic){
+			self.playingMusic = true;
+			update();
 		}
 		console.error("play loved");
 	}catch(error){
