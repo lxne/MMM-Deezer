@@ -332,7 +332,7 @@ async function playLoved (){
 			}
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
 			self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
-			await delay(500);
+			await delay(1000);
 			await self.page.waitForSelector('#page_content div.loved-heading div[data-testid="play"]');
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 			if(!self.playingMusic){
@@ -340,11 +340,15 @@ async function playLoved (){
 				update();
 			}
 	//		await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
-	//		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
 	//		await delay(1000); // kurzes Delay damit sich der Button aktualisieren kann
 			await self.page.waitForSelector('#page_player button[aria-label$="Shuffle"]');
-	//		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
+			if(self.page.querySelector('#page_player button[aria-label*="epeat"]'.getAttribute('aria-label')=="Turn off repeat"){
+				await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
+			}
+			if(self.page.querySelector('#page_player button[aria-label*="epeat"]'.getAttribute('aria-label')=="Repeat all tracks in list"){
+				await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
+			}
+			self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
 		//	self.playingMusic = true;
 		//	update();
 		console.error("play loved");
