@@ -79,7 +79,7 @@ async function closeBrowser(stop){
 	}catch(error){
 		console.error(error);
 	}
-	
+
 }
 
 
@@ -158,7 +158,7 @@ async function playMusic (){
 	}catch(error){
 		console.error(error);
 	}
-	
+
 }
 
 async function pauseMusic (){
@@ -175,7 +175,7 @@ async function pauseMusic (){
 	}catch(error){
 		console.error(error);
 	}
-	
+
 }
 
 async function searchArtist(artist){
@@ -207,7 +207,7 @@ async function searchArtist(artist){
 	}catch(error){
 		console.error(error);
 	}
-	
+
 }
 
 async function searchTitle(title){
@@ -236,8 +236,7 @@ async function searchTitle(title){
 	}catch(error){
 		console.error(error);
 	}
-	
-	
+
 }
 
 async function updateTitleAndArtist(){
@@ -269,8 +268,8 @@ async function updateTitleAndArtist(){
 		self.AdsPlaying = true;
 		return;
 	}
-}
 
+}
 
 async function nextTitle(){
 	try{
@@ -286,8 +285,7 @@ async function nextTitle(){
 	}catch(error){
 		console.error(error);
 	}
-    
-	
+
 }
 
 async function previousTitle (){
@@ -304,8 +302,7 @@ async function previousTitle (){
 	}catch(error){
 		console.error(error);
 	}
-    
-	
+
 }
 
 async function playFlow (){
@@ -324,21 +321,8 @@ async function playFlow (){
 	}catch(error){
 		console.error(error);
 	}
-	
+
 }
-
-
-
-		await self.page.evaluate(()=>document.querySelector('#page_player div.player-controls button[aria-label="Next"]').click()); // EN-Selector
-		if(!self.playingMusic){
-			self.playingMusic = true;
-			update();
-		}
-		console.error("next title");
-	}catch(error){
-		console.error(error);
-
-
 
 async function playLoved (){
 	try{
@@ -369,5 +353,5 @@ async function playLoved (){
 	}catch(error){
 		console.error(error);
 	}
-	
+
 }
