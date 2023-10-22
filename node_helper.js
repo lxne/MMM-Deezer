@@ -275,14 +275,17 @@ async function playLoved (){
 			update();
 		}
 		await self.page.waitForSelector('#page_player button[aria-label$="Shuffle"]');
+		if(self.page.querySelector('#page_player button[aria-label$="Shuffle"]').getAttribute('aria-label')=="Turn on Shuffle"){
+			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
+		}
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Turn off repeat"){
+			await delay(300);
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
 		}
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Repeat all tracks in list"){
+			await delay(300);
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
 		}
-		await delay(1000); // ohne dieses Delay hat sich Shuffle nicht aktiviert
-		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
 		console.error("play loved");
 	}catch(error){
 		console.error(error);
