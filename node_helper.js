@@ -342,10 +342,10 @@ async function playLoved (){
 	//		await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
 	//		await delay(1000); // kurzes Delay damit sich der Button aktualisieren kann
 			await self.page.waitForSelector('#page_player button[aria-label$="Shuffle"]');
-			if(self.page.querySelector('#page_player button[aria-label*="epeat"]'.getAttribute('aria-label')=="Turn off repeat"){
+			if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Turn off repeat"){
 				await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
 			}
-			if(self.page.querySelector('#page_player button[aria-label*="epeat"]'.getAttribute('aria-label')=="Repeat all tracks in list"){
+			if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Repeat all tracks in list"){
 				await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
 			}
 			self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
