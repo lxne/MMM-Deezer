@@ -272,7 +272,7 @@ async function playLoved (){
 		await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 		await self.page.waitForSelector('#page_player button[aria-label$="Shuffle"]');
 		if(self.page.querySelector('#page_player button[aria-label$="Shuffle"]').getAttribute('aria-label')=="Turn on Shuffle"){
-			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
+			self.page.click('#page_player button[aria-label="Turn on Shuffle"]'); // EN-Selector; Zufallswiedergabe an
 			await delay(300);
 		}
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Turn off repeat"){
