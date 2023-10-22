@@ -335,6 +335,10 @@ async function playLoved (){
 			await delay(500);
 			await self.page.waitForSelector('#page_content div.loved-heading div[data-testid="play"]');
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
+			if(!self.playingMusic){
+				self.playingMusic = true;
+				update();
+			}
 	//		await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
 	//		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
 	//		await delay(1000); // kurzes Delay damit sich der Button aktualisieren kann
@@ -343,10 +347,6 @@ async function playLoved (){
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
 		//	self.playingMusic = true;
 		//	update();
-			if(!self.playingMusic){
-				self.playingMusic = true;
-				update();
-			}
 		console.error("play loved");
 //		}
 	}catch(error){
