@@ -313,7 +313,7 @@ async function playFlow (){
 			}
 			await self.page.click('#dzr-app a.logo[aria-label="Deezer"]'); // Zur Hauptseite, falls nicht dort
 			await self.page.waitForSelector('#page_content > div.channel div[data-testid="flow-config-default"] button');
-			await self.page.evaluate(()=>document.querySelector('#page_content > div.channel div[data-testid="flow-config-default"] button').click());
+			await self.page.evaluate(()=>document.querySelector('#page_content > div.channel div[data-testid="flow-config-default"] button[aria-label="Play"]').click()); // EN-Selector; Abspielen
 			self.playingMusic = true;
 			update();
 			console.error("play flow");
@@ -333,6 +333,7 @@ async function playLoved (){
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
 			await self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
 			await self.page.waitForSelector('#page_content button.chakra-button[data-testid="playlist-play-button"]');
+			await delay(5000);
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 			await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn off repeat"]').click()); // EN-Selector; Klicken falls Ein-Song-Wiederholung an
