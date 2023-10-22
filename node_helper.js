@@ -331,8 +331,12 @@ async function playLoved (){
 				await LoginDeezer()
 			}
 			//await self.page.evaluate(()=>document.querySelector('#page_sidebar a.sidebar-nav-link[href$="loved"]').click()); // zu Lieblingssongs wechseln
-			self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
-			await delay(1000);
+			const [response] = await Promise.all([
+				page.waitForNavigation(), // The promise resolves after navigation has finished
+				page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'), // Clicking the link will indirectly cause a navigation
+			]);
+	//		self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
+	//		await delay(1000);
 			await self.page.waitForSelector('#page_content div.loved-heading div[data-testid="play"]');
 			await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 			if(!self.playingMusic){
