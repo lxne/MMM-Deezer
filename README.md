@@ -6,10 +6,10 @@ Unfortunately it seems like the original isn't maintained anymore.
 I am not a real programmer – in this case I am just trying to make things work for me.
 My fork now works well for playing deezer's flow. It also can shuffle loved songs, but always starts with the same song (starting loved songs takes quite some time, if flow was playing).
 
-This module allows you to play music from [Deezer](https://www.deezer.com) with [puppeteer](https://pptr.dev/). That means you need at least a free account from Deezer. It is meant to be used with a speech recognition module like [MMM-GoogleAssistant](https://wiki.bugsounet.fr/en/MMM-GoogleAssistant), but it should work with other modules as long as you send the correct notifications as described below. Since this module opens up a chromium instance and navigates through the deezer website to play music in the background, it may take some time or you may get timeouts on low end hardware like a Raspberry Pi.
+This module allows you to play music from [Deezer](https://www.deezer.com) with [puppeteer](https://pptr.dev/). That means you need at least a free account from Deezer. You need a module to send the correct notifications as described below. Since this module opens up a chromium instance and navigates through the deezer website to play music in the background, it may take some time or you may get timeouts on low end hardware like a Raspberry Pi.
 
 Confirmed working environment:
-- Raspberry Pi 4 with Raspberry Pi OS Bullseye (32/64-Bit) with preinstalled chromium, a node installation and latest [MagicMirror](https://github.com/MichMich/MagicMirror) (v.2.25.0) with electron v.26.3.0 preinstalled.
+- Raspberry Pi 3/4 with Raspberry Pi OS Bullseye (32/64-Bit) with preinstalled chromium, a node installation and latest [MagicMirror](https://github.com/MichMich/MagicMirror) (v.2.25.0) with electron v.26.3.0 preinstalled.
 
 ### Screenshot
 ![](https://raw.githubusercontent.com/ptrk95/MMM-Deezer/master/img/Example.png)
