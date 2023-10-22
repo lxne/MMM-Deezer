@@ -4,7 +4,7 @@ A module for the [MagicMirror](https://github.com/MichMich/MagicMirror) using De
 This module allows you to play music from [Deezer](https://www.deezer.com) with [puppeteer](https://pptr.dev/). That means you need at least a free account from Deezer. It is meant to be used with a speech recognition module like [MMM-GoogleAssistant](https://wiki.bugsounet.fr/en/MMM-GoogleAssistant), but it should work with other modules as long as you send the correct notifications as described below. Since this module opens up a chromium instance and navigates through the deezer website to play music in the background, it may take some time or you may get timeouts on low end hardware like a Raspberry Pi.
 
 Confirmed working environment:
-- Raspberry Pi 3b+ with Raspbian Stretch 9.6 (32-Bit) with preinstalled chromium **Version 65.0.3325.181** , a node installation and latest [MagicMirror](https://github.com/MichMich/MagicMirror) (v.2.6.0) with electron v.2.0.16 preinstalled (v.1.4.15 may not work)
+- Raspberry Pi 4 with Raspberry Pi OS Bullseye (32/64-Bit) with preinstalled chromium, a node installation and latest [MagicMirror](https://github.com/MichMich/MagicMirror) (v.2.25.0) with electron v.26.3.0 preinstalled.
 
 ### Screenshot
 ![](https://raw.githubusercontent.com/ptrk95/MMM-Deezer/master/img/Example.png)
@@ -56,16 +56,14 @@ Change the userDataDir in your config file to your needs. For example the path o
 ## Setup
 ### This explains how to use the module but you can copy paste most of the time
 
-The module has for now 7 features:
+The module's features:
 - Play music 
 - Pause music
 - Play next title
 - Play previous title (if available)
 - Play Deezer Flow
-- Play your favourite tracks randomly
+- Play your favourite tracks randomly (may take a while to start, first song always the same)
 - Stop music (closes browser, but module remains active)
-- Search a title and play it
-- Search a artist and play the top titles
 
 #### Hint: Wait for initialization and log in process before sending any notifications to this module! When the module is ready it looks like the screenshot.
 
@@ -80,184 +78,17 @@ To use the above features you have to send predefined notifications to this modu
 | "AtDeezer" | payload.message="Close" | Closes Browser |
 | "AtDeezer" | payload.message="Flow" | Plays your personal soundtrack made by Deezer |
 | "AtDeezer" | payload.message="Loved" | Plays your favourite tracks randomly |
-| "AtDeezer" | payload.message="Artist"; payload.Artist="NAME_OF_ARTIST" | Searches for a Artist and plays hits |
-| "AtDeezer" | payload.message="Title"; payload.Title="NAME_OF_TITLE" | Searches for a Title and plays it |
 
-For example, this will search for the title "Losing it" if you send this with your module:
-```
-this.sendNotification('AtDeezer', {message: "Title", Title: "Losing it"});
-```
-As you can see the information about the name of the title is needed for this action, this is where a speech recognition software comes in handy. I already set up a couple of "transcription hooks" and even two [gactions](https://developers.google.com/actions/) in combination with [MMM-AssistantMk2](https://github.com/eouia/MMM-AssistantMk2), so that all the features are available. 
 
-### The following only works with [MMM-AssistantMk2](https://github.com/eouia/MMM-AssistantMk2)
-#### If you don't know where you have to place the code, click on the link above
-First you have to add the following commands to your config file:
-```
-command: {
-	"CLOSE_MUSIC": {
-		notificationExec: {
-		      notification: "AtDeezer",
-		      payload: {
-			message: "Close",		      
-      			}
-		},
-	},
-	"SEARCHTITLE": {
-		notificationExec: {
-			notification :() =>{
-			return "AtDeezer"
-			},	
-		      payload:(params, key)=> {
-			return {
-			 message:"Title", 
-			 Title: params.Title,	
-		    		}
-			}
-		},
-	},
-	"SEARCHARTIST": {
-		notificationExec: {
-			notification :() =>{
-			return "AtDeezer"
-			},	
-		      payload:(params, key)=> {
-			return {
-			 message:"Artist", 
-			 Artist: params.Artist,	
-		    		}
-			}
-		},
-	},
-	"PLAYMUSIC": {
-		notificationExec: {
-		      notification: "AtDeezer",
-		      payload: {
-			message: "Play",		      
-      			}
-		},
-	},
-	"NEXT_TITLE": {
-		notificationExec: {
-		      notification: "AtDeezer",
-		      payload: {
-			message: "Next",		      
-      			}
-		},
-	},
-	"PAUSE_MUSIC": {
-		notificationExec: {
-		      notification: "AtDeezer",
-		      payload: {
-			message: "Pause",		      
-      			}
-		},
-	},
-	"PREV_TITLE": {
-		notificationExec: {
-		      notification: "AtDeezer",
-		      payload: {
-			message: "Previous",		      
-      			}
-		},
-	},
-	"FLOW": {
-		notificationExec: {
-		      notification: "AtDeezer",
-		      payload: {
-				message: "Flow",
-				}
-		},
-	},
-	"LOVED": {
-      	notificationExec: {
-        	notification: "AtDeezer",
-        	payload: {
-          		message: "Loved",
-        	}
-      	},
-    },
-	
-},
-```
 
-Then add this transcription hooks to the config file.
-Of course you can change the patterns to what ever you wish, for example translate it in your language:
-```
-transcriptionHook: {
-		"PLAYMUSIC":{
-			pattern: "play music",
-			command: "PLAYMUSIC",
-		},
-		"NEXT_TITLE":{
-			pattern: "next song",
-			command: "NEXT_TITLE",
-		},
-		"PAUSE_MUSIC":{
-			pattern: "pause",
-			command: "PAUSE_MUSIC",
-		},
-		"PREV_TITLE":{
-			pattern: "previous song",
-			command: "PREV_TITLE",
-		},
-		"CLOSE_MUSIC":{
-			pattern: "stop music",
-			command: "CLOSE_MUSIC",
-		},
-		"FLOW":{
-			pattern: "play flow",
-			command: "FLOW",
-		},
-		"LOVED":{
-      		pattern: "play my songs",
-      		command: "LOVED",
-    	},
-},
-```
-
-For the search features you have to add gactions to the config file **and followed the last chapter** [here](https://github.com/eouia/MMM-AssistantMk2/blob/master/USAGE.md)!:
-```
-action:{
-	"SEARCHTITLE" : {
-		command: "SEARCHTITLE"
-	},
-	"SEARCHARTIST" : {
-		command: "SEARCHARTIST"
-	},
-},
-```
-Now download gactions (if you haven't done it as described [here](https://github.com/eouia/MMM-AssistantMk2/blob/master/gaction/README.md)):
-```
-#example for RPI
-cd ~/MagicMirror/modules/MMM-AssistantMk2/gaction
-wget https://dl.google.com/gactions/updates/bin/linux/arm/gactions
-chmod +x gactions
-```
-You can use and modify my actions.js as you please. I commented german phrases besides the english ones, so you can copy and paste it if you know german. But remember to place it here: MagicMirror/modules/MMM-AssistantMk2/gaction
-And also don't forget to do the following: 
- ```
- cd ~/MagicMirror/modules/MMM-AssistantMk2/gaction
-./gactions update --action_package actions.json --project YOUR_PROJECT_ID
-./gactions test --action_package actions.json --project YOUR_PROJECT_ID
-```
 
 ## Troubleshooting
 
 #### Preinstalled Chromium/Chrome not launching or "Initializing..." all the time
 That's most likely a versioning error between puppeteer and your installation of Chromium/Chrome! 
 
-Try: 
-```
-cd ~/MagicMirror/modules/MMM-Deezer
-npm install puppeteer@1.11.0
-```
-And make sure your Chromium version is at least Version 65.0.3325.181! 
+Fix the versioning error. Sorry, haven't had the issue yet.
 
-Update with:
-```
-sudo apt-get install chromium-browser
-```
-
-Also make sure you set the correct path in the config.txt file. 
+Make sure you set the correct path in the config.txt file. 
 
 For Raspberry Pi 3 it is: "/usr/bin/chromium-browser"
