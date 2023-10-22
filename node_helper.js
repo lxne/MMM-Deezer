@@ -326,7 +326,7 @@ async function playFlow (){
 
 async function playLoved (){
 	try{
-		if(!self.playingMusic){
+//		if(!self.playingMusic){
 			if(!self.loggedIn){
 				await LoginDeezer()
 			}
@@ -338,7 +338,7 @@ async function playLoved (){
 				update();
 			}
 			// Make Love
-	//		await self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
+			await self.page.click('#page_sidebar a.sidebar-nav-link[href$="loved"]'); // zu Lieblingssongs wechseln
 	//		await self.page.waitForSelector('#page_content button.chakra-button[data-testid="playlist-play-button"]');
 	//		await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 	//		await self.page.waitForSelector('#page_player button[aria-label*="epeat"]');
@@ -349,7 +349,7 @@ async function playLoved (){
 		//	self.playingMusic = true;
 		//	update();
 			console.error("play loved");
-		}
+//		}
 	}catch(error){
 		console.error(error);
 	}
