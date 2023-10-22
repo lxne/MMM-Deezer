@@ -37,15 +37,9 @@ module.exports = NodeHelper.create({
 			case("PREVIOUS"):
 				previousTitle();
 				break;
-			case("Artist"):
-				searchArtist(payload);
-				break;
 			case("Close"):
 				closeBrowser(false);
 				self.closed = true;
-				break;
-			case("Title"):
-				searchTitle(payload);
 				break;
 			case("FLOW"):
 				playFlow();
@@ -172,67 +166,6 @@ async function pauseMusic (){
 			self.playingMusic = false;
 			console.error("pause music");
 		}  
-	}catch(error){
-		console.error(error);
-	}
-
-}
-
-async function searchArtist(artist){
-	try{
-		if(!self.loggedIn){
-			await LoginDeezer()
-		}
-		console.error(artist);
-		console.error("Searching for " + artist);
-		await self.page.evaluate(()=>document.querySelector('#page_topbar > div.topbar-search > div > form > button.topbar-search-clear').click());
-		await self.page.type('#topbar-search', artist);
-		await self.page.keyboard.press('Enter');
-		await delay(300);
-		await self.page.waitForSelector('#page_naboo_search > div.container > div.search-suggest.clearfix > div.suggest-column.column-artist > ul > li > div.nano-card-infos > div.heading-4.ellipsis > a');
-		await self.page.evaluate(()=>document.querySelector('#page_naboo_search > div.container > div.search-suggest.clearfix > div.suggest-column.column-artist > ul > li > div.nano-card-infos > div.heading-4.ellipsis > a').click());
-		await self.page.waitForSelector('#page_naboo_artist > div.catalog-content > div > div:nth-child(1) > div:nth-child(1) > div > div > div.datagrid-container > div.datagrid > div.datagrid-row.song.is-first > div:nth-child(1) > div > a');
-		await self.page.evaluate(()=>document.querySelector('#page_naboo_artist > div.catalog-content > div > div:nth-child(1) > div:nth-child(1) > div > div > div.datagrid-container > div.datagrid > div.datagrid-row.song.is-first > div:nth-child(1) > div > a').click());
-		//await page.waitForSelector('#page_topbar > div.topbar-search > div > div > div > div > div.search-suggest-content.nano.has-scrollbar > div.nano-content > div > div:nth-child(1) > ul > li > div.nano-card-infos > div.heading-4.ellipsis > a');
-		//var link = await page.evaluate(()=>document.querySelector('#page_naboo_search > div.container > div.search-suggest.clearfix > div.suggest-column.column-artist > ul > li > div.nano-card-infos > div.heading-4.ellipsis > a').getAttribute('href'));
-		//await page.goto("https://www.deezer.com" + link + "/top_track");
-		//await page.waitForSelector('#page_naboo_artist > div.catalog-content > div > div > div > div.datagrid-toolbar > div.toolbar-wrapper.toolbar-wrapper-full > div:nth-child(2) > button');
-		//await page.evaluate(()=>document.querySelector('#page_naboo_artist > div.catalog-content > div > div > div > div.datagrid-toolbar > div.toolbar-wrapper.toolbar-wrapper-full > div:nth-child(2) > button').click());
-		console.error("playing music from "+artist);
-		
-		if(!self.playingMusic){
-			self.playingMusic = true;
-			update();
-		}
-	}catch(error){
-		console.error(error);
-	}
-
-}
-
-async function searchTitle(title){
-	try{
-		if(!self.loggedIn){
-			await LoginDeezer()
-		}
-		console.error("Searching for " + title);
-		await self.page.evaluate(()=>document.querySelector('#page_topbar > div.topbar-search > div > form > button.topbar-search-clear').click());
-		await self.page.type('#topbar-search', title);
-		await self.page.keyboard.press('Enter');
-		await delay(300);
-		await self.page.waitForSelector('#page_naboo_search > div.container > div:nth-child(2) > div > div.datagrid > div:nth-child(2) > div.datagrid-row.song.is-first > div:nth-child(1) > div.datagrid-cell-hover.cell-play > a');
-		await self.page.evaluate(()=>document.querySelector('#page_naboo_search > div.container > div:nth-child(2) > div > div.datagrid > div:nth-child(2) > div.datagrid-row.song.is-first > div:nth-child(1) > div.datagrid-cell-hover.cell-play > a').click());
-		//await page.waitForSelector('#page_topbar > div.topbar-search > div > div > div > div > div.search-suggest-content.nano.has-scrollbar > div.nano-content > div > div:nth-child(1) > ul > li > div.nano-card-infos > div.heading-4.ellipsis > a');
-		//var link = await page.evaluate(()=>document.querySelector('#page_naboo_search > div.container > div.search-suggest.clearfix > div.suggest-column.column-artist > ul > li > div.nano-card-infos > div.heading-4.ellipsis > a').getAttribute('href'));
-		//await page.goto("https://www.deezer.com" + link + "/top_track");
-		//await page.waitForSelector('#page_naboo_artist > div.catalog-content > div > div > div > div.datagrid-toolbar > div.toolbar-wrapper.toolbar-wrapper-full > div:nth-child(2) > button');
-		//await page.evaluate(()=>document.querySelector('#page_naboo_artist > div.catalog-content > div > div > div > div.datagrid-toolbar > div.toolbar-wrapper.toolbar-wrapper-full > div:nth-child(2) > button').click());
-		console.error("playing title "+title);
-		
-		if(!self.playingMusic){
-			self.playingMusic = true;
-			update();
-		}
 	}catch(error){
 		console.error(error);
 	}
