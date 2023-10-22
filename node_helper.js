@@ -272,7 +272,7 @@ async function playLoved (){
 		await self.page.evaluate(()=>document.querySelector('#page_content button.chakra-button[data-testid="playlist-play-button"]').click()); // Abspielen
 		await self.page.waitForSelector('#page_player button[aria-label$="Shuffle"]');
 		if(self.page.querySelector('#page_player button[aria-label$="Shuffle"]').getAttribute('aria-label')=="Turn on Shuffle"){
-			self.page.click('#page_player button[aria-label="Turn on Shuffle"]'); // EN-Selector; Zufallswiedergabe an
+			await self.page.click('#page_player button[aria-label="Turn on Shuffle"]'); // EN-Selector; Zufallswiedergabe an
 			await delay(300);
 		}
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Turn off repeat"){
@@ -282,10 +282,8 @@ async function playLoved (){
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Repeat all tracks in list"){
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
 		}
-		if(!self.playingMusic){
-			self.playingMusic = true;
-			update();
-		}
+		self.playingMusic = true;
+		update();
 		console.error("play loved");
 	}catch(error){
 		console.error(error);
