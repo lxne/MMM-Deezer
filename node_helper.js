@@ -281,6 +281,7 @@ async function playLoved (){
 		if(self.page.querySelector('#page_player button[aria-label*="epeat"]').getAttribute('aria-label')=="Repeat all tracks in list"){
 			await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Repeat all tracks in list"]').click()); // EN-Selector; Zufallswiedergabe an
 		}
+		await delay(1000); // ohne dieses Delay hat sich Shuffle nicht aktiviert
 		await self.page.evaluate(()=>document.querySelector('#page_player button[aria-label="Turn on Shuffle"]').click()); // EN-Selector; Zufallswiedergabe an
 		console.error("play loved");
 	}catch(error){
