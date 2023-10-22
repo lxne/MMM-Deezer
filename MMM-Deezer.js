@@ -1,4 +1,4 @@
-Module.register("MMM-MusicOnDemand",{
+Module.register("MMM-Deezer",{
 	
 	defaults:{
 		chromiumPath: "/usr/bin/chromium-browser", // Set: chromiumPath : null, if you want to use the puppeteer chromium
@@ -26,10 +26,10 @@ Module.register("MMM-MusicOnDemand",{
 		var wrapper = document.createElement("div");
 		var text = '';
 		if(!this.closed){
-			text += "<div class='MOD_player'>";
-			text += "<div class='MOD_text-container'><table class='small'><tr class='MOD_init'><td>"+ this.init +"</td></tr><tr class='MOD_title bright'><td>"+ this.Title +"</td></tr><tr class='MOD_artist'><td>"+ this.Artist +"</td></tr><tr class='MOD_time'><td>"+ this.currentTime + " " + this.maxTime + "</td></tr></table></div>";
+			text += "<div class='DZR_player'>";
+			text += "<div class='DZR_text-container'><table class='small'><tr class='DZR_init'><td>"+ this.init +"</td></tr><tr class='DZR_title bright'><td>"+ this.Title +"</td></tr><tr class='DZR_artist'><td>"+ this.Artist +"</td></tr><tr class='DZR_time'><td>"+ this.currentTime + " " + this.maxTime + "</td></tr></table></div>";
 			if(this.config.showCover && this.Artist != "Deezer"){
-				text += "<div class='MOD_cover-container'><div class='MOD_cover'><img src='"+ this.CoverLink +"' width='250'></div></div>";
+				text += "<div class='DZR_cover-container'><div class='DZR_cover'><img src='"+ this.CoverLink +"' width='250'></div></div>";
 			}
 
 			text += "</div>";
@@ -83,7 +83,7 @@ Module.register("MMM-MusicOnDemand",{
 		} else {
 			Log.log(this.name + " received a system notification: " + notification);
 		}
-		if(notification == "AtMusicOnDemand"){
+		if(notification == "AtDeezer"){
 			switch(payload.message){
 				case("Play"):
 					this.sendSocketNotification("PLAY", "");
@@ -97,14 +97,8 @@ Module.register("MMM-MusicOnDemand",{
 				case("Previous"):
 					this.sendSocketNotification("PREVIOUS", "");
 					break;
-				case("Artist"):
-					this.sendSocketNotification("Artist", payload.Artist);				
-					break;
 				case("Close"):
 					this.sendSocketNotification("Close", "");
-					break;
-				case("Title"):
-					this.sendSocketNotification("Title", payload.Title);
 					break;
 				case("Flow"):
 					this.sendSocketNotification("FLOW", "");
