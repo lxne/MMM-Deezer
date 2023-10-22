@@ -97,14 +97,8 @@ Module.register("MMM-Deezer",{
 				case("Previous"):
 					this.sendSocketNotification("PREVIOUS", "");
 					break;
-				case("Artist"):
-					this.sendSocketNotification("Artist", payload.Artist);				
-					break;
 				case("Close"):
 					this.sendSocketNotification("Close", "");
-					break;
-				case("Title"):
-					this.sendSocketNotification("Title", payload.Title);
 					break;
 				case("Flow"):
 					this.sendSocketNotification("FLOW", "");
